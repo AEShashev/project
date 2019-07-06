@@ -78,7 +78,49 @@
             </div>
         </div>
     </div>
+    <?php
+
+ 
+function reload(){ 
+include 'connect.php'; // подключаем скрипт
+$link = mysqli_connect($host, $user, $password, $database) 
+    or die("Ошибка " . mysqli_error($link)); 
+     
+$query ="SELECT * FROM items";
+ echo "<h1>Список блоков</h1>";
+
+// подключаемся к серверу
+
+$result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+if($result)
+{
+    $rows = mysqli_num_rows($result); // количество полученных строк
+     
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col0\">ID</th><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Колличество</th><th class=\"col5\">Поставщик</th><th class=\"col6\">Покупка</th></tr>";
+    for ($i = 0 ; $i < $rows ; ++$i)
+    {
+        $row = mysqli_fetch_row($result);
+        echo "<tr>";
+			echo "<td class=\"col0\">$row[0]</td><td class=\"col1\">$row[1]</td><td class=\"col2\">$row[2]</td><td class=\"col3\">$row[3]</td><td class=\"col4\">$row[4]</td><td class=\"col5\">$row[5]</td><td class=\"col6\"></td>";
+        echo "</tr>";
+    }
+    echo "</table></div>";
+     
+    // очищаем результат
+    mysqli_free_result($result);
+}
+ 
+mysqli_close($link);
+}
+ 
+ reload();
+
+
+
+?>
 </main>
+
+
 
 
 <?php include ("footer.php") ?>
