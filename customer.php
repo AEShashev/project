@@ -41,6 +41,16 @@
         .card__text{
             margin-bottom: 15px;
         }
+        #count {
+            max-width: 50px;
+        }
+        #buy {
+            padding:5px;
+            font-size:12px;
+            background:#007bff;
+            color:white;
+            border-radius:5px;
+        }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -87,7 +97,7 @@ $link = mysqli_connect($host, $user, $password, $database)
     or die("Ошибка " . mysqli_error($link)); 
      
 $query ="SELECT * FROM items";
- echo "<h1>Список блоков</h1>";
+ echo "<h1>Список доступных товаров</h1>";
 
 // подключаемся к серверу
 
@@ -101,7 +111,7 @@ if($result)
     {
         $row = mysqli_fetch_row($result);
         echo "<tr>";
-			echo "<td class=\"col0\">$row[0]</td><td class=\"col1\">$row[1]</td><td class=\"col2\">$row[2]</td><td class=\"col3\">$row[3]</td><td class=\"col4\">$row[4]</td><td class=\"col5\">$row[5]</td><td class=\"col6\"></td>";
+			echo "<td class=\"col0\">$row[0]</td><td class=\"col1\">$row[1]</td><td class=\"col2\">$row[2]</td><td class=\"col3\">$row[3]</td><td class=\"col4\">$row[4]</td><td class=\"col5\">$row[5]</td><td class=\"col6\"><input type='text' id='count' name='count'> <a id='buy' href='#' action=''>Купить</a></td>";
         echo "</tr>";
     }
     echo "</table></div>";
