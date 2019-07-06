@@ -206,7 +206,15 @@ mysqli_close($link);
         <tbody id="tbody">
         </tbody>
     </table>
-    <div class="total">
+    <div>Итого:</div><div class="summary"></div>
+    <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+    <button type="button" class="btn btn-secondary btn-sm">Очистить корзину</button>
+    <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
+    </div>
+</div>
+<div class="total">
         <div>Итого:</div><div class="summary"></div>
     </div>
 </div>
