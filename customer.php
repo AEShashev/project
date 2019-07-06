@@ -15,6 +15,7 @@
             background-color: white;
             margin: 0 auto;
             border-radius: 5px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
         }
         
         .card__img{
@@ -53,10 +54,35 @@
             color:white;
             border-radius:5px;
         }
+
+        .total{
+            display: flex;
+            float: right;
+        }
+
+        .summary{
+            margin-left: 15px;
+        }
+
+        .cart_count{
+            background-color: blue;
+            border-radius: 50px;
+            height: 21px;
+            width: 21px;
+            display: inline-block;
+            padding: 0 6px;
+            color: white;
+        }
+
+        .card__price{
+            float: right;
+            height: 38px;
+            padding: 9px 0;
+        }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
         <h1 class="h2">Заказчикам</h1>
     </div>
 <div class="">
@@ -65,7 +91,10 @@
                 <a class="nav-link active" id="items-tab" data-toggle="tab" href="#items" role="tab" aria-controls="items" aria-selected="true">Товары</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Корзина</a>
+                <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Корзина <span class="cart_count d-none"></span></a>
+            </li>            
+            <li class="nav-item">
+                <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Заказы</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -74,43 +103,50 @@
 <div class="tab-pane fade show active" id="items" role="tabpanel" aria-labelledby="home-tab">
 
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Найти товар</h1>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1 class="h2">Популярные товары</h1>
     </div>
     <div class="cards">
-        <div class="card">
+        <div class="card" data-item-id="1" data-item-price="100">
             <div class="card__img">
                 <img src="/project/apelsin.png">
             </div>
-            <div class="card__title">Апельсин</div>
+            <div class="card__title">Апельсины</div>
             <div class="card__container">
                 <div class="card__text">Хачю опельсин, сладкий опельсин</div>
                 <button class="card__btn btn btn-primary">Купить</button>
+                <a href="#" class="card__price">от 100 ₽</a>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-item-id="2" data-item-price="200">
             <div class="card__img">
                 <img src="/project/ananas.png">
             </div>
-            <div class="card__title">Ананас</div>
+            <div class="card__title">Помидоры</div>
             <div class="card__container">
-                <div class="card__text">Хачю ананас, сладкий ананас</div>
+                <div class="card__text">Хачю памидор, сладкий как ананас</div>
                 <button class="card__btn btn btn-primary">Купить</button>
+                <a href="#" class="card__price">от 200 ₽</a>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-item-id="3" data-item-price="10000">
             <div class="card__img">
                 <img src="/project/olivie.png">
             </div>
-            <div class="card__title">Оливье</div>
+            <div class="card__title">Рабы</div>
             <div class="card__container">
                 <div class="card__text">Хачю Оливье</div>
                 <button class="card__btn btn btn-primary">Купить</button>
+                <a href="#" class="card__price">от 10000 ₽</a>
             </div>
         </div>
     </div>
     <br>
 <br>
+
+<div class="searcher">
+    <input type="text" placeholder="Поиск товара" />
+</div>
     <?php
 
 
@@ -157,7 +193,7 @@ mysqli_close($link);
 <br>
 
 </div>
-<div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="home-tab">
+<div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-tab">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -178,7 +214,28 @@ mysqli_close($link);
         <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
     </div>
 </div>
+<div class="total">
+        <div>Итого:</div><div class="summary"></div>
+    </div>
 </div>
+
+
+<div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Итого</th>
+                <th>Статус</th>
+            </tr>
+        <thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
 </div>
 </main>
 
@@ -201,6 +258,11 @@ mysqli_close($link);
             item_count = parseInt(item_count);
         }
 
+        addNewItem(item_id, item_name, item_price, item_count);
+
+    });
+
+    function addNewItem(item_id, item_name, item_price, item_count){        
         var cart = ls.getItem("cart");
         if (cart != null){
             var popal = false;
@@ -226,7 +288,7 @@ mysqli_close($link);
         }
         ls.setItem('cart', cart);
         drawTable(cart);
-    });
+    }
 
     function drawTable(cart){        
         var table = '';
@@ -260,7 +322,18 @@ mysqli_close($link);
         });
         $("#tbody").html(table);
         $(".summary").text(summ);
+        if (JSON.parse(cart).item.length > 0){
+            $(".cart_count").text(JSON.parse(cart).item.length).removeClass('d-none');
+        }
     }
+
+    $(".card__btn").on('click', function(){
+        var item_id = $(this).parents('.card').attr('data-item-id');
+        var item_price = $(this).parents('.card').attr('data-item-price');
+        var item_name = $(this).parents('.card').children('.card__title').text();
+        var item_count = 1;
+        addNewItem(item_id, item_name, item_price, item_count);
+    });
 </script>
 
 
