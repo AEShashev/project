@@ -158,10 +158,12 @@ mysqli_close($link);
         <thead>
             <tr>
                 <th>Наименование</th>
-                <th>Наименование</th>
-                <th>Наименование</th>
+                <th>Стоимость</th>
+                <th>Количество</th>
             </tr>
         <thead>
+        <tbody id="tbody">
+        </tbody>
     </table>
 </div>
 </div>
@@ -170,26 +172,64 @@ mysqli_close($link);
 <script>
     var ls = localStorage;
     $(document).ready(function(){
-        ls.getItem('cart');
+        var cart = ls.getItem("cart");        
+        drawTable(cart);
     });
 
     $(".item-buy").on("click", function(e){
         e.preventDefault();
         var item_id = $(this).parent().parent().children(".col0").text();
-        var item_name = $(this).parent().parent().children(".col1").text();        
+        var item_name = $(this).parent().parent().children(".col1").text();       
+        var item_price = $(this).parent().parent().children(".col3").text();     
         var item_count = $(this).parent().parent().children(".col6").children(".item-count").val();
         if (item_count == ""){
             item_count = 1;
         }
-        var new_item = ' { "id" : ' + item_id + ', "name" : "' + item_name + '", "count" : ' + item_count + ' } ';
-        new_item = JSON.parse(new_item);
+        var new_item = { "id" : item_id, "name" : item_name, "price" : item_price, "count" : item_count };
+        new_item = JSON.stringify(new_item);
         console.log(new_item);
-        // var cart = ls.getItem("cart");
-        // if (cart = ""){
-        //     cart = '{ ' + item + ' }';
-        // }
-        // console.log(cart);
+        var cart = ls.getItem("cart");
+        if (cart != null){
+            cart = JSON.parse(cart);
+            cart["item"].push(JSON.parse(new_item));
+            cart = JSON.stringify(cart);
+        } else {
+            cart = '{ "item" : [' + new_item + '] }';
+        }
+        ls.setItem('cart', cart);
+        drawTable(cart);
     });
+
+    function drawTable(cart){        
+        var table = '';
+        var cost = 0;
+        var _table = JSON.parse(cart, function(key, value) {
+            switch (key){
+
+                case 'id': 
+                    table+='<tr data-item-id="'+value+'">';
+                    break;
+                
+                case 'name': 
+                    table+='<td class="name">'+value+'</td>';
+                    break;
+                
+                case 'price': 
+                    table+='<td class="price">'+value+'</td>';
+                    cost = value;
+                    break;
+                
+                case 'count': 
+                    table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                    break;
+
+                default:
+                    break;
+
+            }
+        });
+        $("#tbody").html(table);
+    }
 </script>
 
 
