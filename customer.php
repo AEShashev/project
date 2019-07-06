@@ -173,6 +173,14 @@ mysqli_close($link);
     <div>Итого:</div><div class="summary"></div>
 </div>
 </div>
+<div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+    <button type="button" class="btn btn-secondary btn-sm">Очистить корзину</button>
+        <button type="button" class="btn btn-primary btn-sm">Оформить заказ</button>
+    
+    </div>
+</div>
 </main>
 
 <script>
