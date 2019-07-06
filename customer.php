@@ -206,17 +206,13 @@ mysqli_close($link);
         <tbody id="tbody">
         </tbody>
     </table>
-    <div>Итого:</div><div class="summary"></div>
-    <div class="row">
-    <div class="col-md-8"></div>
-    <div class="col-md-4">
-    <button type="button" class="btn btn-secondary btn-sm">Очистить корзину</button>
-    <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
-    </div>
-</div>
-<div class="total">
+<button type="button" id="clear_card" class="btn btn-secondary btn-sm">Очистить корзину</button>
+        <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
+    <div class="total">
         <div>Итого:</div><div class="summary"></div>
     </div>
+</div>
+
 </div>
 
 
@@ -294,36 +290,43 @@ mysqli_close($link);
         var table = '';
         var cost = 0;
         var summ = 0;
-        var _table = JSON.parse(cart, function(key, value) {
-            switch (key){
+        if (cart != null){
+            var _table = JSON.parse(cart, function(key, value) {
+                switch (key){
 
-                case 'id': 
-                    table+='<tr data-item-id="'+value+'">';
-                    break;
-                
-                case 'name': 
-                    table+='<td class="name">'+value+'</td>';
-                    break;
-                
-                case 'price': 
-                    table+='<td class="price">'+value+'</td>';
-                    cost = value;
-                    break;
-                
-                case 'count': 
-                    table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
-                    summ+=value*cost;
-                    break;
+                    case 'id': 
+                        table+='<tr data-item-id="'+value+'">';
+                        break;
+                    
+                    case 'name': 
+                        table+='<td class="name">'+value+'</td>';
+                        break;
+                    
+                    case 'price': 
+                        table+='<td class="price">'+value+'</td>';
+                        cost = value;
+                        break;
+                    
+                    case 'count': 
+                        table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                        summ+=value*cost;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
 
-            }
-        });
+                }
+            });
+        }
         $("#tbody").html(table);
         $(".summary").text(summ);
-        if (JSON.parse(cart).item.length > 0){
-            $(".cart_count").text(JSON.parse(cart).item.length).removeClass('d-none');
+        
+        if (cart != null){            
+            if (JSON.parse(cart).item.length > 0){
+                $(".cart_count").text(JSON.parse(cart).item.length).removeClass('d-none');
+            }
+        } else {
+            $(".cart_count").text('0').addClass('d-none');
         }
     }
 
@@ -333,6 +336,11 @@ mysqli_close($link);
         var item_name = $(this).parents('.card').children('.card__title').text();
         var item_count = 1;
         addNewItem(item_id, item_name, item_price, item_count);
+    });
+
+    $("#clear_card").on('click', function(){
+        ls.removeItem('cart');
+        drawTable(null);
     });
 </script>
 
