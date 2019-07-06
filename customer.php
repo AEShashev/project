@@ -206,14 +206,14 @@ mysqli_close($link);
         <tbody id="tbody">
         </tbody>
     </table>
-<button type="button" id="clear_card" class="btn btn-secondary btn-sm">Очистить корзину</button>
+        <button type="button" id="clear_card" class="btn btn-secondary btn-sm">Очистить корзину</button>
         <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
-    <div class="total">
-        <div>Итого:</div><div class="summary"></div>
-    </div>
+        <div class="total">
+            <div>Итого:</div>
+            <div class="summary"></div>
+        </div>
 </div>
 
-</div>
 
 
 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -231,6 +231,7 @@ mysqli_close($link);
     </table>
 </div>
 
+</div>
 
 </div>
 </main>
