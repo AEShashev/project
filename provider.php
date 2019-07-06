@@ -75,6 +75,7 @@
 
 
             <div class="tab-pane fade" id="storages" role="tabpanel" aria-labelledby="storages-tab">
+                <!-- <div style="width: 640px; height: 480px" id="mapContainer"></div> -->
 
             </div>
 
@@ -112,9 +113,17 @@
             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                 123
             </div>
+
+
         </div>
     </div>
 </main>
 
+<script>
+
+$(document).ready(function(){
+    
+});
+</script>
 
 <?php include ("footer.php") ?>
