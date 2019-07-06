@@ -72,6 +72,12 @@
             padding: 0 6px;
             color: white;
         }
+
+        .card__price{
+            float: right;
+            height: 38px;
+            padding: 9px 0;
+        }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -100,34 +106,37 @@
         <h1 class="h2">Найти товар</h1>
     </div>
     <div class="cards">
-        <div class="card">
+        <div class="card" data-item-id="1" data-item-price="100">
             <div class="card__img">
                 <img src="/project/apelsin.png">
             </div>
-            <div class="card__title">Апельсин</div>
+            <div class="card__title">Апельсины</div>
             <div class="card__container">
                 <div class="card__text">Хачю опельсин, сладкий опельсин</div>
                 <button class="card__btn btn btn-primary">Купить</button>
+                <a href="#" class="card__price">от 100 ₽</a>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-item-id="2" data-item-price="200">
             <div class="card__img">
                 <img src="/project/ananas.png">
             </div>
-            <div class="card__title">Ананас</div>
+            <div class="card__title">Помидоры</div>
             <div class="card__container">
-                <div class="card__text">Хачю ананас, сладкий ананас</div>
+                <div class="card__text">Хачю памидор, сладкий как ананас</div>
                 <button class="card__btn btn btn-primary">Купить</button>
+                <a href="#" class="card__price">от 200 ₽</a>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-item-id="3" data-item-price="10000">
             <div class="card__img">
                 <img src="/project/olivie.png">
             </div>
-            <div class="card__title">Оливье</div>
+            <div class="card__title">Рабы</div>
             <div class="card__container">
                 <div class="card__text">Хачю Оливье</div>
                 <button class="card__btn btn btn-primary">Купить</button>
+                <a href="#" class="card__price">от 10000 ₽</a>
             </div>
         </div>
     </div>
@@ -236,6 +245,11 @@ mysqli_close($link);
             item_count = parseInt(item_count);
         }
 
+        addNewItem(item_id, item_name, item_price, item_count);
+
+    });
+
+    function addNewItem(item_id, item_name, item_price, item_count){        
         var cart = ls.getItem("cart");
         if (cart != null){
             var popal = false;
@@ -261,7 +275,7 @@ mysqli_close($link);
         }
         ls.setItem('cart', cart);
         drawTable(cart);
-    });
+    }
 
     function drawTable(cart){        
         var table = '';
@@ -299,6 +313,14 @@ mysqli_close($link);
             $(".cart_count").text(JSON.parse(cart).item.length).removeClass('d-none');
         }
     }
+
+    $(".card__btn").on('click', function(){
+        var item_id = $(this).parents('.card').attr('data-item-id');
+        var item_price = $(this).parents('.card').attr('data-item-price');
+        var item_name = $(this).parents('.card').children('.card__title').text();
+        var item_count = 1;
+        addNewItem(item_id, item_name, item_price, item_count);
+    });
 </script>
 
 
