@@ -1,6 +1,6 @@
 <?php
-$host = 'localhost'; // адрес сервера 
-$database = 'data'; // имя базы данных
-$user = 'root'; // имя пользователя
-$password = ''; // пароль
+$host = 'sql178.main-hosting.eu'; // адрес сервера 
+$database = 'u794422688_users'; // имя базы данных
+$user = 'u794422688_root'; // имя пользователя
+$password = 'CheekAtilla'; // пароль
 ?>
