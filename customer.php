@@ -15,6 +15,7 @@
             background-color: white;
             margin: 0 auto;
             border-radius: 5px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
         }
         
         .card__img{
@@ -81,7 +82,7 @@
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
         <h1 class="h2">Заказчикам</h1>
     </div>
 <div class="">
@@ -102,8 +103,8 @@
 <div class="tab-pane fade show active" id="items" role="tabpanel" aria-labelledby="home-tab">
 
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Найти товар</h1>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1 class="h2">Популярные товары</h1>
     </div>
     <div class="cards">
         <div class="card" data-item-id="1" data-item-price="100">
@@ -142,6 +143,10 @@
     </div>
     <br>
 <br>
+
+<div class="searcher">
+    <input type="text" placeholder="Поиск товара" />
+</div>
     <?php
 
 
