@@ -160,6 +160,7 @@ mysqli_close($link);
                 <th>Наименование</th>
                 <th>Стоимость</th>
                 <th>Количество</th>
+                <th>Итого</th>
             </tr>
         <thead>
         <tbody id="tbody">
@@ -180,20 +181,35 @@ mysqli_close($link);
         e.preventDefault();
         var item_id = $(this).parent().parent().children(".col0").text();
         var item_name = $(this).parent().parent().children(".col1").text();       
-        var item_price = $(this).parent().parent().children(".col3").text();     
+        var item_price = parseInt($(this).parent().parent().children(".col3").text()); 
         var item_count = $(this).parent().parent().children(".col6").children(".item-count").val();
         if (item_count == ""){
             item_count = 1;
+        } else {
+            item_count = parseInt(item_count);
         }
-        var new_item = { "id" : item_id, "name" : item_name, "price" : item_price, "count" : item_count };
-        new_item = JSON.stringify(new_item);
-        console.log(new_item);
+
         var cart = ls.getItem("cart");
         if (cart != null){
+            var popal = false;
             cart = JSON.parse(cart);
-            cart["item"].push(JSON.parse(new_item));
+            for (var i = 0; i<cart.item.length; i++){
+                if (cart.item[i].id == item_id){
+                    cart.item[i].count = parseInt(cart.item[i].count) + item_count;
+                    popal = true;
+                    break;
+                }
+            }
+            if (!popal){
+                var new_item = { "id" : item_id, "name" : item_name, "price" : item_price, "count" : item_count };
+                new_item = JSON.stringify(new_item);                
+                cart["item"].push(JSON.parse(new_item));
+            }
             cart = JSON.stringify(cart);
         } else {
+            
+            var new_item = { "id" : item_id, "name" : item_name, "price" : item_price, "count" : item_count };
+            new_item = JSON.stringify(new_item);
             cart = '{ "item" : [' + new_item + '] }';
         }
         ls.setItem('cart', cart);
