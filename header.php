@@ -21,6 +21,15 @@
     .navbar-brand{
         background-color: #1E3D6B !important;
         box-shadow: none !important;
+        padding: 5px .75rem;
+    }
+
+    #logo{
+        height: 65px;
+    }
+
+    .sidebar-sticky{
+        padding-top: 45px !important;
     }
 
     body{
@@ -66,12 +75,12 @@
   <body>
 
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/project/index.php"><img source="/logo.png"></a>
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Выйти</a>
-    </li>
-  </ul>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/project/index.php"><img id="logo" src="/project/mbt_logo_with_text.png"></a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#"><img id="sign_out" src="/project/exit.png" height="40px"></a>
+        </li>
+    </ul>
 </nav>
 
 
