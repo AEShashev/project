@@ -1,5 +1,5 @@
 <?php
-
+define("CONFIG_PATH", ROOT. "/config/");
 class Db{
 
 	public static function connect(){
