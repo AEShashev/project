@@ -4,6 +4,10 @@
 
 
 </body>
+
+<footer>
+<p style="text-align:right; color:grey;">My Best Trade © 2019</p> 
+</footer>
 </html>
 <script>
     $(document).ready(function(){

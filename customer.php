@@ -131,9 +131,10 @@
             </div>
         </div>
     </div>
-    
+    <br>
+<br>
+    <?php
 
-<?php
 
  
 function reload(){ 
@@ -142,8 +143,8 @@ $link = mysqli_connect($host, $user, $password, $database)
     or die("Ошибка " . mysqli_error($link)); 
      
 $query ="SELECT * FROM items";
- echo "<h1 class='mt-5'>Список доступных товаров</h1>";
-
+ echo "<h1>Список доступных товаров</h1>";
+echo "<br>";
 // подключаемся к серверу
 
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
@@ -173,6 +174,9 @@ mysqli_close($link);
 
 
 ?>
+
+<br>
+<br>
 
 </div>
 <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-tab">
