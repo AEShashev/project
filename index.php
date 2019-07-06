@@ -15,7 +15,7 @@
 <style>
 .blocks {
 	width:100%;
-  float:gg;
+  float:ggolololo;
 }
 
 .blocks th {
