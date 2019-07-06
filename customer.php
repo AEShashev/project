@@ -14,6 +14,7 @@
             display: block;
             background-color: white;
             margin: 0 auto;
+            border-radius: 5px;
         }
         
         .card__img{
@@ -21,6 +22,7 @@
             margin: -1px;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
+            overflow: hidden;
         }
 
         .card__img img{
