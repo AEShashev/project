@@ -79,32 +79,52 @@
 
             </div>
 
+            <?php 
+            include 'connect.php'; // подключаем скрипт
+            $connect = mysqli_connect($host, $user, $password, $database) 
+                or die("Ошибка " . mysqli_error($connect)); 
+                 
+            $result = mysqli_query($connect, "SELECT Name,INN,Acc,kAcc,bik,adres,bank FROM providers WHERE uID = 1") or die ("Ошибка ". mysqli_error($connect));
+
+            while($row = mysqli_fetch_array($result)){
+               $name = $row['Name'];
+               $INN = $row['INN'];
+               $Acc = $row['Acc'];
+               $kAcc = $row['kAcc'];
+               $bik = $row['bik'];
+               $adres = $row['adres'];
+               $bank = $row['bank'] ;	
+
+              // echo "<p>$name</p><p>$INN</p><p>$Acc</p><p>$kAcc</p><p>$bik</p><p>$adres</p><p>$bank</p>";
+            }
+
+            ?>
 
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="form">
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="name">Наименование</label>
-                        <input class="col-12 col-md-6" id="name" placeholder="Наименование" value="Рога и копыта" />  
+                        <input class="col-12 col-md-6" id="name" placeholder="Наименование" />  
                     </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="inn">ИНН</label>                  
-                        <input class="col-12 col-md-6" id="inn" placeholder="ИНН" value="14881488" />
+                        <input class="col-12 col-md-6" id="inn" placeholder="ИНН" />
                     </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="address">Расчётный счёт</label>
-                        <input class="col-12 col-md-6" id="address" placeholder="Расчётный счёт" value="32283228" />
+                        <input class="col-12 col-md-6" id="address" placeholder="Расчётный счёт"  />
                     </div>
                     <div class="col-12">
-                        <label class="col-12 col-md-4 text-right" for="account">БИК</label>
-                        <input class="col-12 col-md-6" id="account" placeholder="БИК" value="12345678" />
+                        <label class="col-12 col-md-4 text-right" for="Acc">БИК</label>
+                        <input class="col-12 col-md-6" id="Acc" placeholder="БИК"  />
                     </div>
                     <div class="col-12">
-                        <label class="col-12 col-md-4 text-right" for="bank_number">Банковский счёт</label>
-                        <input class="col-12 col-md-6" id="bank_number" placeholder="Банковский счёт" value="5469000000000000" />
+                        <label class="col-12 col-md-4 text-right" for="kAccr">Кор. счёт</label>
+                        <input class="col-12 col-md-6" id="kAcc" placeholder="Кор. счёт"  />
                     </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="bank">Наименование банка</label>
-                        <input class="col-12 col-md-6" id="bank" placeholder="Наименование банка" value="БАНКОБАНК" />
+                        <input class="col-12 col-md-6" id="bank" placeholder="Наименование банка"  />
                     </div>
                 </div>
             </div>
@@ -122,7 +142,14 @@
 <script>
 
 $(document).ready(function(){
-    
+
+    $('#name').val('<?php echo $name ?>');
+    $('#inn').val('<?php echo $INN ?>');
+    $('#address').val('<?php echo $adres ?>');
+    $('#Acc').val('<?php echo $Acc ?>');
+    $('#kAcc').val('<?php echo $kAcc ?>');
+    $('#bik').val('<?php echo $bik ?>');
+    $('#bank').val('<?php echo $bank ?>');
 });
 </script>
 
