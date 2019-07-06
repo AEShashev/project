@@ -211,7 +211,7 @@ mysqli_close($link);
     <div class="col-md-8"></div>
     <div class="col-md-4">
     <button type="button" class="btn btn-secondary btn-sm">Очистить корзину</button>
-        <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
+    <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
     </div>
 </div>
 <div class="total">
