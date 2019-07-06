@@ -20,7 +20,7 @@
 
 
 
-.blocks th {
+.blocks th, .blocks .poshelnahui {
 	font-size:12px;
 	text-align:center;
 	border:solid 1px lightgrey;
