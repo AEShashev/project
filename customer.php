@@ -43,6 +43,7 @@
 
         .card__text{
             margin-bottom: 15px;
+            min-height: 50px;
         }
         .item-count {
             max-width: 50px;

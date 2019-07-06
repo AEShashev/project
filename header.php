@@ -15,11 +15,12 @@
 
 <style>
     nav{
-        background-color: #1E3D6B !important;
+        background-color: #2C5E9E !important;    
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.3), 0 2px 10px 0 rgba(0,0,0,.3);
     }
 
     .navbar-brand{
-        background-color: #1E3D6B !important;
+        background-color: #2C5E9E !important;
         box-shadow: none !important;
         padding: 5px .75rem;
     }
@@ -41,8 +42,8 @@
 
     .sidebar-sticky{
         padding-top: 45px !important;
+        margin-top: 10px;
     }
-
     
     .sign-out #sign_out{
         display: block;
@@ -104,15 +105,15 @@
   <body>
 
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/project/index.php">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 ml-4" href="/project/index.php">
         <img id="logo" src="/project/logo.png">        
         <img id="logo_dark" src="/project/logo_dark.png">
     </a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link sign-out" href="#">
-                <img id="sign_out" src="/project/exit.png" height="40px">                
-                <img id="sign_out_dark" src="/project/exit_dark.png" height="40px">
+                <img id="sign_out" src="/project/exit.png" height="33px">                
+                <img id="sign_out_dark" src="/project/exit_dark.png" height="33px">
             </a>
         </li>
     </ul>
@@ -126,26 +127,22 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="/project/index.php">
-              <span data-feather="home"></span>
-              Главная
+                Главная
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/project/customer.php">
-              <span data-feather="file"></span>
-              Заказчикам
+                Заказчикам
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/project/provider.php">
-              <span data-feather="shopping-cart"></span>
-              Поставщикам
+                Поставщикам
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/project/carrier.php">
-              <span data-feather="users"></span>
-              Перевозчикам
+                Перевозчикам
             </a>
           </li>
         </ul>
