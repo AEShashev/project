@@ -1,5 +1,6 @@
 <?php include ("header.php");
 $userID = 1;
+$providerID = 1;
 ?>
 
 
@@ -47,37 +48,92 @@ $userID = 1;
 
             <div class="tab-pane fade show active" id="items" role="tabpanel" aria-labelledby="home-tab">
                 <h4>Ваши товары</h4>
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th>Наименование</th>
-                            <th>Цена</th>
-                            <th>Количество</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>апельсин</td>
-                            <td>149 руб</td>
-                            <td>1488</td>
-                        </tr>
-                        <tr>
-                            <td>Ананас</td>
-                            <td>149 руб</td>
-                            <td>1488</td>
-                        </tr>
-                        <tr>
-                            <td>Оливье</td>
-                            <td>149 руб</td>
-                            <td>1488</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <?php
+
+
+ 
+function reload(){ 
+include 'connect.php'; // подключаем скрипт
+$link = mysqli_connect($host, $user, $password, $database) 
+    or die("Ошибка " . mysqli_error($link)); 
+     
+$query ="SELECT * FROM items WHERE pID = 1";
+
+echo "<br>";
+// подключаемся к серверу
+
+$result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+if($result)
+{
+    $rows = mysqli_num_rows($result); // количество полученных строк
+     
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Количество</th><th class=\"col5\">Поставщик</th></tr>";
+    for ($i = 0 ; $i < $rows ; ++$i)
+    {
+        $row = mysqli_fetch_row($result);
+        echo "<tr>";
+			echo "<td class=\"col0\">$row[1]</td><td class=\"col1\">$row[2]</td><td class=\"col2\">$row[3]</td><td class=\"col3\">$row[4]</td><td><input type='text' class='item-count' name='count'> <a class='item-buy' href='#' action=''>Купить</a></td>";
+        echo "</tr>";
+    }
+    echo "</table></div>";
+     
+    // очищаем результат
+    mysqli_free_result($result);
+}
+ 
+mysqli_close($link);
+}
+ 
+ reload();
+
+
+
+?>
             </div>
 
 
             <div class="tab-pane fade" id="storages" role="tabpanel" aria-labelledby="storages-tab">
-                <!-- <div style="width: 640px; height: 480px" id="mapContainer"></div> -->
+            <?php
+
+
+ 
+function reloadStorage(){ 
+include 'connect.php'; // подключаем скрипт
+$link = mysqli_connect($host, $user, $password, $database) 
+    or die("Ошибка " . mysqli_error($link)); 
+     
+$query ="SELECT * FROM storages WHERE pID = 1";
+
+echo "<br>";
+// подключаемся к серверу
+
+$result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+if($result)
+{
+    $rows = mysqli_num_rows($result); // количество полученных строк
+     
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Название</th><th class=\"col2\">Адрес</th><th class=\"col3\">Управление</th></tr>";
+    for ($i = 0 ; $i < $rows ; ++$i)
+    {
+        $row = mysqli_fetch_row($result);
+        echo "<tr>";
+			echo "<td class=\"col0\">$row[1]</td><td class=\"col1\">$row[2]</td><td> <a class='storage-edit' href='#' action=''>Редактировать</a></td>";
+        echo "</tr>";
+    }
+    echo "</table></div>";
+     
+    // очищаем результат
+    mysqli_free_result($result);
+}
+ 
+mysqli_close($link);
+}
+ 
+ reloadStorage();
+
+
+
+?>
 
             </div>
 
