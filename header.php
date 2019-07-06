@@ -28,6 +28,16 @@
           font-size: 3.5rem;
         }
       }
+
+      footer {
+
+        position:fixed;
+        bottom:0px;
+        height:20px;
+        background:#343a40;
+        z-index:101;
+        width:100%;
+      }
     </style>
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
