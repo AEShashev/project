@@ -1,4 +1,6 @@
-<?php include ("header.php") ?>
+<?php include ("header.php");
+$userID = 1;
+?>
 
 
 <style>
@@ -84,7 +86,7 @@
             $connect = mysqli_connect($host, $user, $password, $database) 
                 or die("Ошибка " . mysqli_error($connect)); 
                  
-            $result = mysqli_query($connect, "SELECT Name,INN,Acc,kAcc,bik,adres,bank FROM providers WHERE uID = 1") or die ("Ошибка ". mysqli_error($connect));
+            $result = mysqli_query($connect, "SELECT Name,INN,Acc,kAcc,bik,adres,bank FROM providers WHERE uID = $userID") or die ("Ошибка ". mysqli_error($connect));
 
             while($row = mysqli_fetch_array($result)){
                $name = $row['Name'];
@@ -101,6 +103,7 @@
             ?>
 
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form method="POST">
                 <div class="form">
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="name">Наименование</label>
@@ -126,7 +129,10 @@
                         <label class="col-12 col-md-4 text-right" for="bank">Наименование банка</label>
                         <input class="col-12 col-md-6" id="bank" placeholder="Наименование банка"  />
                     </div>
+                    <br>
+                    <button id="save" type="submit" style="float:right;" class="btn btn-success">Сохранить профиль</button>
                 </div>
+              </form>  
             </div>
 
 
@@ -151,6 +157,7 @@ $(document).ready(function(){
     $('#bik').val('<?php echo $bik ?>');
     $('#bank').val('<?php echo $bank ?>');
 });
+
 </script>
 
 <?php include ("footer.php") ?>
