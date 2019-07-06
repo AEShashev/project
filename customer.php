@@ -162,11 +162,15 @@ mysqli_close($link);
         <thead>
             <tr>
                 <th>Наименование</th>
-                <th>Наименование</th>
-                <th>Наименование</th>
+                <th>Стоимость</th>
+                <th>Количество</th>
+                <th>Итого</th>
             </tr>
         <thead>
+        <tbody id="tbody">
+        </tbody>
     </table>
+    <div>Итого:</div><div class="summary"></div>
 </div>
 </div>
 </main>
@@ -174,26 +178,82 @@ mysqli_close($link);
 <script>
     var ls = localStorage;
     $(document).ready(function(){
-        ls.getItem('cart');
+        var cart = ls.getItem("cart");        
+        drawTable(cart);
     });
 
     $(".item-buy").on("click", function(e){
         e.preventDefault();
         var item_id = $(this).parent().parent().children(".col0").text();
-        var item_name = $(this).parent().parent().children(".col1").text();        
+        var item_name = $(this).parent().parent().children(".col1").text();       
+        var item_price = parseInt($(this).parent().parent().children(".col3").text()); 
         var item_count = $(this).parent().parent().children(".col6").children(".item-count").val();
         if (item_count == ""){
             item_count = 1;
+        } else {
+            item_count = parseInt(item_count);
         }
-        var new_item = ' { "id" : ' + item_id + ', "name" : "' + item_name + '", "count" : ' + item_count + ' } ';
-        new_item = JSON.parse(new_item);
-        console.log(new_item);
-        // var cart = ls.getItem("cart");
-        // if (cart = ""){
-        //     cart = '{ ' + item + ' }';
-        // }
-        // console.log(cart);
+
+        var cart = ls.getItem("cart");
+        if (cart != null){
+            var popal = false;
+            cart = JSON.parse(cart);
+            for (var i = 0; i<cart.item.length; i++){
+                if (cart.item[i].id == item_id){
+                    cart.item[i].count = parseInt(cart.item[i].count) + item_count;
+                    popal = true;
+                    break;
+                }
+            }
+            if (!popal){
+                var new_item = { "id" : item_id, "name" : item_name, "price" : item_price, "count" : item_count };
+                new_item = JSON.stringify(new_item);                
+                cart["item"].push(JSON.parse(new_item));
+            }
+            cart = JSON.stringify(cart);
+        } else {
+            
+            var new_item = { "id" : item_id, "name" : item_name, "price" : item_price, "count" : item_count };
+            new_item = JSON.stringify(new_item);
+            cart = '{ "item" : [' + new_item + '] }';
+        }
+        ls.setItem('cart', cart);
+        drawTable(cart);
     });
+
+    function drawTable(cart){        
+        var table = '';
+        var cost = 0;
+        var summ = 0;
+        var _table = JSON.parse(cart, function(key, value) {
+            switch (key){
+
+                case 'id': 
+                    table+='<tr data-item-id="'+value+'">';
+                    break;
+                
+                case 'name': 
+                    table+='<td class="name">'+value+'</td>';
+                    break;
+                
+                case 'price': 
+                    table+='<td class="price">'+value+'</td>';
+                    cost = value;
+                    break;
+                
+                case 'count': 
+                    table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                    summ+=value*cost;
+                    break;
+
+                default:
+                    break;
+
+            }
+        });
+        $("#tbody").html(table);
+        $(".summary").text(summ);
+    }
 </script>
 
 
