@@ -117,7 +117,7 @@ if($result)
     {
         $row = mysqli_fetch_row($result);
         echo "<tr>";
-			echo "<td class=\"col0\">$row[1]</td><td class=\"col1\">$row[2]</td><td> <a class='storage-edit' href='#' action=''>Редактировать</a></td>";
+			echo "<td class=\"col0\"><a href=\"/project/storage.php\">$row[1]</a></td><td class=\"col1\">$row[2]</td><td> <a class='storage-edit' href='#' action=''>Редактировать</a></td>";
         echo "</tr>";
     }
     echo "</table></div>";
@@ -130,9 +130,6 @@ mysqli_close($link);
 }
  
  reloadStorage();
-
-
-
 ?>
 
             </div>
