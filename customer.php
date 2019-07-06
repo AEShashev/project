@@ -53,6 +53,25 @@
             color:white;
             border-radius:5px;
         }
+
+        .total{
+            display: flex;
+            float: right;
+        }
+
+        .summary{
+            margin-left: 15px;
+        }
+
+        .cart_count{
+            background-color: blue;
+            border-radius: 50px;
+            height: 21px;
+            width: 21px;
+            display: inline-block;
+            padding: 0 6px;
+            color: white;
+        }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -65,7 +84,10 @@
                 <a class="nav-link active" id="items-tab" data-toggle="tab" href="#items" role="tab" aria-controls="items" aria-selected="true">Товары</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Корзина</a>
+                <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Корзина <span class="cart_count d-none"></span></a>
+            </li>            
+            <li class="nav-item">
+                <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Заказы</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -153,7 +175,7 @@ mysqli_close($link);
 ?>
 
 </div>
-<div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="home-tab">
+<div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-tab">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -166,8 +188,28 @@ mysqli_close($link);
         <tbody id="tbody">
         </tbody>
     </table>
-    <div>Итого:</div><div class="summary"></div>
+    <div class="total">
+        <div>Итого:</div><div class="summary"></div>
+    </div>
 </div>
+
+
+<div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Итого</th>
+                <th>Статус</th>
+            </tr>
+        <thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
 </div>
 </main>
 
@@ -249,6 +291,9 @@ mysqli_close($link);
         });
         $("#tbody").html(table);
         $(".summary").text(summ);
+        if (JSON.parse(cart).item.length > 0){
+            $(".cart_count").text(JSON.parse(cart).item.length).removeClass('d-none');
+        }
     }
 </script>
 
