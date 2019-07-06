@@ -166,6 +166,7 @@ mysqli_close($link);
         <tbody id="tbody">
         </tbody>
     </table>
+    <div>Итого:</div><div class="summary"></div>
 </div>
 </div>
 </main>
@@ -219,6 +220,7 @@ mysqli_close($link);
     function drawTable(cart){        
         var table = '';
         var cost = 0;
+        var summ = 0;
         var _table = JSON.parse(cart, function(key, value) {
             switch (key){
 
@@ -237,6 +239,7 @@ mysqli_close($link);
                 
                 case 'count': 
                     table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                    summ+=value*cost;
                     break;
 
                 default:
@@ -245,6 +248,7 @@ mysqli_close($link);
             }
         });
         $("#tbody").html(table);
+        $(".summary").text(summ);
     }
 </script>
 
