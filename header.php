@@ -23,7 +23,7 @@
         text-anchor: middle;
       }
 
-      @media (min-width: 768px) {
+    @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }

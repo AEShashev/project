@@ -43,10 +43,10 @@
         .card__text{
             margin-bottom: 15px;
         }
-        #count {
+        .item-count {
             max-width: 50px;
         }
-        #buy {
+        .item-buy {
             padding:5px;
             font-size:12px;
             background:#007bff;
@@ -55,6 +55,25 @@
         }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Заказчикам</h1>
+    </div>
+<div class="">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="items-tab" data-toggle="tab" href="#items" role="tab" aria-controls="items" aria-selected="true">Товары</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Корзина</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+
+
+<div class="tab-pane fade show active" id="items" role="tabpanel" aria-labelledby="home-tab">
+
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Найти товар</h1>
     </div>
@@ -111,12 +130,12 @@ if($result)
 {
     $rows = mysqli_num_rows($result); // количество полученных строк
      
-    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col0\">ID</th><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Колличество</th><th class=\"col5\">Поставщик</th><th class=\"col6\">Покупка</th></tr>";
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col0\">ID</th><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Количество</th><th class=\"col5\">Поставщик</th><th class=\"col6\">Покупка</th></tr>";
     for ($i = 0 ; $i < $rows ; ++$i)
     {
         $row = mysqli_fetch_row($result);
         echo "<tr>";
-			echo "<td class=\"col0\">$row[0]</td><td class=\"col1\">$row[1]</td><td class=\"col2\">$row[2]</td><td class=\"col3\">$row[3]</td><td class=\"col4\">$row[4]</td><td class=\"col5\">$row[5]</td><td class=\"col6\"><input type='text' id='count' name='count'> <a id='buy' href='#' action=''>Купить</a></td>";
+			echo "<td class=\"col0\">$row[0]</td><td class=\"col1\">$row[1]</td><td class=\"col2\">$row[2]</td><td class=\"col3\">$row[3]</td><td class=\"col4\">$row[4]</td><td class=\"col5\">$row[5]</td><td class=\"col6\"><input type='text' class='item-count' name='count'> <a class='item-buy' href='#' action=''>Купить</a></td>";
         echo "</tr>";
     }
     echo "</table></div>";
@@ -136,7 +155,46 @@ mysqli_close($link);
 
 <br>
 <br>
+
+</div>
+<div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="home-tab">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Наименование</th>
+                <th>Наименование</th>
+            </tr>
+        <thead>
+    </table>
+</div>
+</div>
 </main>
+
+<script>
+    var ls = localStorage;
+    $(document).ready(function(){
+        ls.getItem('cart');
+    });
+
+    $(".item-buy").on("click", function(e){
+        e.preventDefault();
+        var item_id = $(this).parent().parent().children(".col0").text();
+        var item_name = $(this).parent().parent().children(".col1").text();        
+        var item_count = $(this).parent().parent().children(".col6").children(".item-count").val();
+        if (item_count == ""){
+            item_count = 1;
+        }
+        var new_item = ' { "id" : ' + item_id + ', "name" : "' + item_name + '", "count" : ' + item_count + ' } ';
+        new_item = JSON.parse(new_item);
+        console.log(new_item);
+        // var cart = ls.getItem("cart");
+        // if (cart = ""){
+        //     cart = '{ ' + item + ' }';
+        // }
+        // console.log(cart);
+    });
+</script>
 
 
 
