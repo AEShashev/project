@@ -13,7 +13,7 @@
 
 
 <style>
-      .bd-placeholder-img {
+      .bd-placeholder-img, .bd-placeholdre-img .poshelnahui {
         font-size: 1.125rem;
         text-anchor: middle;
       }
