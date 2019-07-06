@@ -90,7 +90,10 @@
             </div>
         </div>
     </div>
+    <br>
+<br>
     <?php
+
 
  
 function reload(){ 
@@ -100,7 +103,7 @@ $link = mysqli_connect($host, $user, $password, $database)
      
 $query ="SELECT * FROM items";
  echo "<h1>Список доступных товаров</h1>";
-
+echo "<br>";
 // подключаемся к серверу
 
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
