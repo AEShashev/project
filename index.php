@@ -15,8 +15,10 @@
 <style>
 .blocks {
 	width:100%;
-  float:ggolololo
+  float:ggololopll;lo
 }
+
+
 
 .blocks th {
 	font-size:12px;
