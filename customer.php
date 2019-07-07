@@ -443,10 +443,6 @@ reload();
             var mov = setInterval(function(){
                 var _lat = map.getCenter().lat + 0.0005;
                 var _lng = map.getCenter().lng + 0.0005;
-                map.setCenter({
-                    lat: _lat,
-                    lng: _lng
-                });
                 marker.setPosition({
                     lat: _lat,
                     lng: _lng
