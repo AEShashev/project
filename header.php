@@ -24,12 +24,40 @@
         padding: 5px .75rem;
     }
 
-    #logo{
+    .navbar-brand #logo{
+        display: block;
         height: 65px;
+    }
+    .navbar-brand #logo_dark{
+        display: none;
+        height: 65px;
+    }
+    .navbar-brand:hover #logo{
+        display: none;
+    }
+    .navbar-brand:hover #logo_dark{
+        display: block;
     }
 
     .sidebar-sticky{
         padding-top: 45px !important;
+    }
+
+    
+    .sign-out #sign_out{
+        display: block;
+    }
+
+    .sign-out #sign_out_dark{
+        display: none;
+    }
+
+    .sign-out:hover #sign_out{
+        display: none;
+    }
+    
+    .sign-out:hover #sign_out_dark{
+        display: block;
     }
 
     body{
@@ -65,6 +93,7 @@
 
       .container-fluid{
           margin-bottom: 100px;
+          margin-top: 40px;
       }
     </style>
     <!-- Custom styles for this template -->
@@ -75,10 +104,16 @@
   <body>
 
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/project/index.php"><img id="logo" src="/project/mbt_logo_with_text.png"></a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/project/index.php">
+        <img id="logo" src="/project/logo.png">        
+        <img id="logo_dark" src="/project/logo_dark.png">
+    </a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#"><img id="sign_out" src="/project/exit.png" height="40px"></a>
+            <a class="nav-link sign-out" href="#">
+                <img id="sign_out" src="/project/exit.png" height="40px">                
+                <img id="sign_out_dark" src="/project/exit_dark.png" height="40px">
+            </a>
         </li>
     </ul>
 </nav>
