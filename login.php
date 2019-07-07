@@ -44,7 +44,7 @@
 		event.preventDefault();
 		$.ajax({
 			type: "POST",
-			url: 'http://project/check_login.php',
+			url: 'http://localhost/project/check_login.php',
 			data: 'login='+$('#inputLogin').val()+'&password='+$('#inputPassword').val(),
 			success: function(result) {
 				account(result);
