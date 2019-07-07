@@ -17,7 +17,11 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
-      }
+	  }
+	  .regtext {
+		color:#D7DDE2;
+		padding:5px;
+	  }
     </style>
 <body class="text-center">
 <form class="form-signin" action="" id="loginform" method="post"name="loginform">
@@ -32,6 +36,8 @@
       <input style="margin-top:10px;" type="password" name="password" id="password" class="form-control" placeholder="Password" required>
       <div class="checkbox mb-3"></div>
       <button class="btn btn-lg btn-primary btn-block" name="login" id="login" type="submit">Войти</button>
+	  <br>
+	  <p class="regtext">Еще не зарегистрированы?<a href= "register.php">Регистрация</a></p>
       <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
 </form>
 <?php
