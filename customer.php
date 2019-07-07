@@ -80,6 +80,10 @@
             height: 38px;
             padding: 9px 0;
         }
+
+        input[type="number"]{
+            max-width: 50px;
+        }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -333,7 +337,7 @@ reload();
                         break;
                     
                     case 'count': 
-                        table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                        table+='<td class="count"><input type="number" value="'+value+'" /><a href="#" class="delete-item"><i class="fa fa-times"></i></a></td><td class="summ">'+(value*cost)+'</td></tr>';
                         summ+=value*cost;
                         break;
 
@@ -366,6 +370,56 @@ reload();
     $("#clear_card").on('click', function(){
         ls.removeItem('cart');
         drawTable(null);
+    });
+
+    $(document).on('click', '.delete-item', function(e){
+        e.preventDefault();
+        var cart = ls.getItem("cart");
+        cart = JSON.parse(cart);
+        if (cart == null){
+            return false;
+        } else {
+            var item_id = parseInt($(this).parents("tr").attr('data-item-id'));
+            var _cart ='{"item" : [';
+            if (cart.item.length == 1){
+                _cart = null;
+            } else {
+                for (var i = 0; i<cart.item.length; i++){
+                    if (cart.item[i].id != item_id){
+                        _cart+=JSON.stringify(cart.item[i]) +',';
+                    }
+                }
+                _cart = _cart.slice(0, _cart.length - 1) + '] }';
+            }
+        }
+        cart = _cart;
+        if (cart!=null){
+            ls.setItem('cart', cart);
+        } else {            
+            ls.removeItem('cart');
+        }
+        drawTable(cart);
+    });
+
+    $(document).on('change','input[type="number"]',function(){        
+        var cart = ls.getItem("cart");
+        cart = JSON.parse(cart);
+        var item_id = $(this).parents('tr').attr('data-item-id');
+        var item_name = $(this).parents('tr').children('.name').text();
+        var item_price = $(this).parents('tr').children('.price').text();
+        var item_count = $(this).val();
+        if (item_count == 0){
+            $(this).parents('tr').children('.count').children('.delete-item').click();
+            return true;
+        }
+        for (var i = 0; i<cart.item.length; i++){
+            if (cart.item[i].id == item_id){
+                cart.item[i].count = item_count;
+            }
+        }
+        cart = JSON.stringify(cart);
+        ls.setItem('cart', cart);
+        drawTable(cart);
     });
 </script>
 
