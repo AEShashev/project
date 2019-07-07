@@ -60,6 +60,10 @@ else:
         padding-top: 45px !important;
         margin-top: 10px;
     }
+
+    .sidebar-sticky .nav-link{
+        font-size: 16px;
+    }
     
     .sign-out #sign_out{
         display: block;
