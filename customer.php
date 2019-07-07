@@ -43,6 +43,7 @@
 
         .card__text{
             margin-bottom: 15px;
+            min-height: 50px;
         }
         .item-count {
             max-width: 50px;
@@ -78,6 +79,10 @@
             float: right;
             height: 38px;
             padding: 9px 0;
+        }
+
+        input[type="number"]{
+            max-width: 50px;
         }
 </style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -142,12 +147,13 @@
         </div>
     </div>
     <br>
-<br>
+    <br>
 
-<div class="searcher">
-    <input type="text" placeholder="Поиск товара" />
-</div>
-    <?php
+
+    <div class="searcher">
+        <input type="text" placeholder="Поиск товара" />
+    </div>
+        <?php
 
 
  
@@ -182,11 +188,7 @@ if($result)
  
 mysqli_close($link);
 }
- 
- reload();
-
-
-
+reload();
 ?>
 
 <br>
@@ -207,14 +209,49 @@ mysqli_close($link);
         </tbody>
     </table>
         <button type="button" id="clear_card" class="btn btn-secondary btn-sm">Очистить корзину</button>
-        <button type="button" class="btn btn-primary btn-sm" id="neworder">Оформить заказ</button>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#orderForm" id="neworder">Оформить заказ</button>
         <div class="total">
             <div>Итого:</div>
             <div class="summary"></div>
         </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="orderForm" tabindex="-1" role="dialog" aria-labelledby="orderFormLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderFormLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">                
+                <div class="form">
+                        <div class="col-12">
+                            <label class="col-12 col-md-4 text-right" for="address">Адрес</label>
+                            <input class="col-12 col-md-6" id="address" placeholder="Адрес" />  
+                        </div>
+                        <div class="col-12">
+                            <label class="col-12 col-md-4 text-right" for="bank_card">Номер карты</label>                  
+                            <input class="col-12 col-md-6" id="bank_card" placeholder="Номер карты" />
+                        </div>
+                        <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary">Заказать</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
+<style>
 
+</style>
 
 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
     <table class="table table-striped">
@@ -224,11 +261,106 @@ mysqli_close($link);
                 <th>Количество</th>
                 <th>Итого</th>
                 <th>Статус</th>
+                <th>На карте</th>
             </tr>
         <thead>
         <tbody>
+            <tbody>
+                <tr>
+                    <td>Опельсины</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Мандарины</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ананасы</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Помидоры</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Рабы</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Опельсины</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Мандарины</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ананасы</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Помидоры</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Рабы</td>
+                    <td>14</td>
+                    <td>1400</td>
+                    <td class="status rides">В пути</td>
+                    <td class="map">
+                        <a class="map__marker" href="#">Показать</a>
+                    </td>
+                </tr>
+            </tbody>
         </tbody>
     </table>
+    
+    <div style="width: 640px; height: 480px" id="mapContainer"></div>
 </div>
 
 </div>
@@ -238,9 +370,73 @@ mysqli_close($link);
 
 <script>
     var ls = localStorage;
+    var map;
+    var marker;
     $(document).ready(function(){
         var cart = ls.getItem("cart");        
         drawTable(cart);
+    });
+
+    $('.map__marker').on('click', function(e){
+        e.preventDefault();
+        
+        if (map ==null){
+        
+            var platform = new H.service.Platform({ 
+                'app_id': 'nAo325kqe9RfEXGcY7rD', 
+                'app_code': 'it85BIGBamkI4S3Ey7o36A' 
+            }); 
+
+
+            // Obtain the default map types from the platform object: 
+            var defaultLayers = platform.createDefaultLayers(); 
+
+            // Instantiate (and display) a map object: 
+            map = new H.Map( 
+                document.getElementById('mapContainer'), 
+                defaultLayers.normal.map, 
+                    { 
+                    zoom: 15, 
+                    center: { 
+                        lat:52.5192,
+                        lng:13.4061 
+                        } 
+                    }
+                );
+
+            marker = new H.map.Marker({
+                lat:52.5192,
+                lng:13.4061
+            });
+            map.addObject(marker);
+            var mov = setInterval(function(){
+                var _lat = map.getCenter().lat + 0.0005;
+                var _lng = map.getCenter().lng + 0.0005;
+                map.setCenter({
+                    lat: _lat,
+                    lng: _lng
+                });
+                marker.setPosition({
+                    lat: _lat,
+                    lng: _lng
+                });
+            }, 5000);
+        } else {
+            map.setCenter({
+                lat:52.5192,
+                lng:13.4061
+            });
+            marker.setPosition({
+                lat:52.5192,
+                lng:13.4061
+            });
+        }
+        $('html, body').animate({
+            scrollTop: $('#mapContainer').offset().top
+        }, 250);
+    });
+
+    $('.nav-link#orders-tab').on('click', function(){
     });
 
     $(".item-buy").on("click", function(e){
@@ -309,7 +505,7 @@ mysqli_close($link);
                         break;
                     
                     case 'count': 
-                        table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                        table+='<td class="count"><input type="number" value="'+value+'" /><a href="#" class="delete-item"><i class="fa fa-times"></i></a></td><td class="summ">'+(value*cost)+'</td></tr>';
                         summ+=value*cost;
                         break;
 
@@ -342,6 +538,56 @@ mysqli_close($link);
     $("#clear_card").on('click', function(){
         ls.removeItem('cart');
         drawTable(null);
+    });
+
+    $(document).on('click', '.delete-item', function(e){
+        e.preventDefault();
+        var cart = ls.getItem("cart");
+        cart = JSON.parse(cart);
+        if (cart == null){
+            return false;
+        } else {
+            var item_id = parseInt($(this).parents("tr").attr('data-item-id'));
+            var _cart ='{"item" : [';
+            if (cart.item.length == 1){
+                _cart = null;
+            } else {
+                for (var i = 0; i<cart.item.length; i++){
+                    if (cart.item[i].id != item_id){
+                        _cart+=JSON.stringify(cart.item[i]) +',';
+                    }
+                }
+                _cart = _cart.slice(0, _cart.length - 1) + '] }';
+            }
+        }
+        cart = _cart;
+        if (cart!=null){
+            ls.setItem('cart', cart);
+        } else {            
+            ls.removeItem('cart');
+        }
+        drawTable(cart);
+    });
+
+    $(document).on('change','input[type="number"]',function(){        
+        var cart = ls.getItem("cart");
+        cart = JSON.parse(cart);
+        var item_id = $(this).parents('tr').attr('data-item-id');
+        var item_name = $(this).parents('tr').children('.name').text();
+        var item_price = $(this).parents('tr').children('.price').text();
+        var item_count = $(this).val();
+        if (item_count == 0){
+            $(this).parents('tr').children('.count').children('.delete-item').click();
+            return true;
+        }
+        for (var i = 0; i<cart.item.length; i++){
+            if (cart.item[i].id == item_id){
+                cart.item[i].count = item_count;
+            }
+        }
+        cart = JSON.stringify(cart);
+        ls.setItem('cart', cart);
+        drawTable(cart);
     });
 </script>
 
