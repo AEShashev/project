@@ -159,31 +159,39 @@ mysqli_close($link);
             ?>
 
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <form method="POST">
+            <form method="POST" action="saveprofile.php">
                 <div class="form">
+                    <div style="display:none;" class="col-12">
+                        <label class="col-12 col-md-4 text-right" for="name">pID</label>
+                        <input class="col-12 col-md-6" id="pID" name="pID" disbled value="<?php echo $providerID?>" />  
+                    </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="name">Наименование</label>
-                        <input class="col-12 col-md-6" id="name" placeholder="Наименование" />  
+                        <input class="col-12 col-md-6" id="name" name="name" placeholder="Наименование" />  
                     </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="inn">ИНН</label>                  
-                        <input class="col-12 col-md-6" id="inn" placeholder="ИНН" />
+                        <input class="col-12 col-md-6" id="inn" name="inn" placeholder="ИНН" />
                     </div>
                     <div class="col-12">
-                        <label class="col-12 col-md-4 text-right" for="address">Расчётный счёт</label>
-                        <input class="col-12 col-md-6" id="address" placeholder="Расчётный счёт"  />
+                        <label class="col-12 col-md-4 text-right" for="address">Адрес</label>
+                        <input class="col-12 col-md-6" id="address" name="address" placeholder="Адрес"  />
                     </div>
                     <div class="col-12">
-                        <label class="col-12 col-md-4 text-right" for="Acc">БИК</label>
-                        <input class="col-12 col-md-6" id="Acc" placeholder="БИК"  />
+                        <label class="col-12 col-md-4 text-right" for="bik">БИК</label>
+                        <input class="col-12 col-md-6" id="bik" name="bik" placeholder="БИК"  />
+                    </div>
+                    <div class="col-12">
+                        <label class="col-12 col-md-4 text-right" for="Acc">Расчетный счет</label>
+                        <input class="col-12 col-md-6" id="Acc" name="Acc" placeholder="Расчетный счет"  />
                     </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="kAccr">Кор. счёт</label>
-                        <input class="col-12 col-md-6" id="kAcc" placeholder="Кор. счёт"  />
+                        <input class="col-12 col-md-6" id="kAcc" name="kAcc" placeholder="Кор. счёт"  />
                     </div>
                     <div class="col-12">
                         <label class="col-12 col-md-4 text-right" for="bank">Наименование банка</label>
-                        <input class="col-12 col-md-6" id="bank" placeholder="Наименование банка"  />
+                        <input class="col-12 col-md-6" id="bank" name="bank" placeholder="Наименование банка"  />
                     </div>
                     <br>
                     <button id="save" type="submit" style="float:right;" class="btn btn-success">Сохранить профиль</button>

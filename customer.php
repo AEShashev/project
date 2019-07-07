@@ -311,7 +311,7 @@ mysqli_close($link);
                     break;
                 
                 case 'count': 
-                    table+='<td class="count">'+value+'</td><td class="summ">'+(value*cost)+'</td></tr>';
+                    table+='<td class="count"><span class="minus">-</span>'+value+'<span class="plus">+</span></td><td class="summ">'+(value*cost)+'</td></tr>';
                     summ+=value*cost;
                     break;
 
@@ -337,6 +337,24 @@ mysqli_close($link);
 </script>
 
 
+<script type="text/jаvascript" >
+        $(document).ready(function() {
+            $('.minus').click(function () {
+                var $input = $(this).parent().find('input');
+                var count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+                return false;
+            });
+            $('.plus').click(function () {
+                var $input = $(this).parent().find('input');
+                $input.val(parseInt($input.val()) + 1);
+                $input.change();
+                return false;
+            });
+        });
+    </script>
 
 
 <?php include ("footer.php") ?>
