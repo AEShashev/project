@@ -23,8 +23,8 @@
     <label for="email" class="sr-only">Пароль</label>
 	<input type="text" id="password" name="password" class="form-control" placeholder="Пароль" required style="margin-top: 10px;">
 	<p class="submit"><button class="btn btn-lg btn-primary btn-block mt-3" id="register" name= "register" type="submit">Зарегистрироваться</button></p>
-	  <p class="regtext">Уже зарегистрированы? <br /><a href= "login.php">Введите имя пользователя</a>!</p>
-      <p class="mt-5 mb-3 text-muted">© 2019</p>
+	<p class="regtext">Уже зарегистрированы? <br /><a href= "login.php">Введите имя пользователя</a>!</p>
+    <p class="mt-5 mb-3 text-muted">© 2019</p>
 </form>
 
 
