@@ -109,7 +109,7 @@
 
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-        <h1 class="h2">Популярные товары</h1>
+        <h1 class="h4">Популярные товары</h1>
     </div>
     <div class="cards">
         <div class="card" data-item-id="1" data-item-price="100">
@@ -163,7 +163,7 @@ $link = mysqli_connect($host, $user, $password, $database)
     or die("Ошибка " . mysqli_error($link)); 
      
 $query ="SELECT * FROM items";
- echo "<h1>Список доступных товаров</h1>";
+ echo "<h4>Список доступных товаров</h1>";
 echo "<br>";
 // подключаемся к серверу
 
@@ -477,7 +477,7 @@ reload();
         }
 
         addNewItem(item_id, item_name, item_price, item_count);
-
+        $("#cart-tab").click();
     });
 
     function addNewItem(item_id, item_name, item_price, item_count){        
@@ -558,6 +558,7 @@ reload();
         var item_name = $(this).parents('.card').children('.card__title').text();
         var item_count = 1;
         addNewItem(item_id, item_name, item_price, item_count);
+        $("#cart-tab").click();
     });
 
     $("#clear_card").on('click', function(){

@@ -25,8 +25,8 @@
 <br>
 <br>
       <h1 class="h3 mb-3 font-weight-normal" style="color:#D7DDE2">Пожалуйста, войдите в систему</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
+      <label for="inputEmail" class="sr-only">Login</label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="Login" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
 	  
       <input style="margin-top:10px;" type="password" name="password" id="password" class="form-control" placeholder="Password" required>
