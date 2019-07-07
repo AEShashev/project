@@ -61,13 +61,15 @@
 while($row=mysqli_fetch_assoc($query))
  {
 	$dbusername=$row['login'];
-  	$dbpassword=$row['pass'];
+	  $dbpassword=$row['pass'];
+	  $uID = $row['id'];
  }
   if($username == $dbusername && $password == $dbpassword)
  {
 	// старое место расположения
 	//  session_start();
-	 $_SESSION['session_username']=$username;	 
+	 $_SESSION['session_username']=$username;	
+	 $_SESSION['id']=$uID; 
  /* Перенаправление браузера */
    header("Location: index.php");
 	}
