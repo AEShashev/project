@@ -51,10 +51,7 @@
 				console.log(result);
 			},
 			error: function(){
-				toast({
-			  		type: (json.status == 'Ошибка!' ? 'error' : 'success'),
-			  		title: 'Ошибка! Попробуйте позже',
-		  		});
+				console.log('error');
 			}
 		});
 	});

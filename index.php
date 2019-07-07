@@ -1,7 +1,7 @@
-<?php
+ <?php
 session_start();
 if(empty($_SESSION['user'])){
-      header('Location: http://project/login.php');
+      header('Location: /project/login.php');
   }
 else {
 ?>
