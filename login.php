@@ -73,7 +73,7 @@ while($row=mysqli_fetch_assoc($query))
   if($username == $dbusername && $password == $dbpassword)
  {
 	// старое место расположения
-	//  session_start();
+	  session_start();
 	 $_SESSION['session_username']=$username;	
 	 $_SESSION['id']=$uID; 
  /* Перенаправление браузера */
