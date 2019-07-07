@@ -67,12 +67,12 @@ if($result)
 {
     $rows = mysqli_num_rows($result); // количество полученных строк
      
-    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Количество</th><th class=\"col5\">Поставщик</th></tr>";
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Количество</th><th></th></tr>";
     for ($i = 0 ; $i < $rows ; ++$i)
     {
         $row = mysqli_fetch_row($result);
-        echo "<tr>";
-			echo "<td class=\"col0\">$row[1]</td><td class=\"col1\">$row[2]</td><td class=\"col2\">$row[3]</td><td class=\"col3\">$row[4]</td><td><input type='text' class='item-count' name='count'> <a class='item-buy' href='#' action=''>Купить</a></td>";
+        echo "<tr data-item-id='$row[0]'>";
+			echo "<td class=\"col0\">$row[1]</td><td class=\"col1\">$row[2]</td><td class=\"col2\">$row[3]</td><td class=\"col3\">$row[4]</td><td><a href='#' class='edit-item'><i class='fa fa-pencil'></i></a></td>";
         echo "</tr>";
     }
     echo "</table></div>";
@@ -217,6 +217,11 @@ $(document).ready(function(){
     $('#kAcc').val('<?php echo $kAcc ?>');
     $('#bik').val('<?php echo $bik ?>');
     $('#bank').val('<?php echo $bank ?>');
+});
+
+$('.edit-item').on('click', function(){
+    var item_id = $(this).parents('tr').attr('data-item-id');
+    document.location.href = '/project/item.php?item_id=' + item_id;
 });
 
 </script>

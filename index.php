@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+ <?php
+session_start();
+if(empty($_SESSION['user'])){
+      header('Location: /project/login.php');
+  }
+else {
+?>
+>>>>>>> 09a61dda6c4004f43bf6892b6e098766dd28673e
 
 
 

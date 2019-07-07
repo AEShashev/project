@@ -114,22 +114,22 @@
     <div class="cards">
         <div class="card" data-item-id="1" data-item-price="100">
             <div class="card__img">
-                <img src="/project/apelsin.png">
+                <img src="/project/honey.png">
             </div>
-            <div class="card__title">Апельсины</div>
+            <div class="card__title">Мёд</div>
             <div class="card__container">
-                <div class="card__text">Хачю опельсин, сладкий опельсин</div>
+                <div class="card__text">Пчёлы старались, мы продаём</div>
                 <button class="card__btn btn btn-primary">Купить</button>
                 <a href="#" class="card__price">от 100 ₽</a>
             </div>
         </div>
         <div class="card" data-item-id="2" data-item-price="200">
             <div class="card__img">
-                <img src="/project/ananas.png">
+                <img src="/project/baran.png">
             </div>
-            <div class="card__title">Помидоры</div>
+            <div class="card__title">Баранина</div>
             <div class="card__container">
-                <div class="card__text">Хачю памидор, сладкий как ананас</div>
+                <div class="card__text">Хоть и баран, но быковал</div>
                 <button class="card__btn btn btn-primary">Купить</button>
                 <a href="#" class="card__price">от 200 ₽</a>
             </div>
@@ -220,7 +220,7 @@ reload();
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="orderFormLabel">Modal title</h5>
+                <h5 class="modal-title" id="orderFormLabel">Введите Ваши данные</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -232,15 +232,44 @@ reload();
                             <input class="col-12 col-md-6" id="address" placeholder="Адрес" />  
                         </div>
                         <div class="col-12">
-                            <label class="col-12 col-md-4 text-right" for="bank_card">Номер карты</label>                  
-                            <input class="col-12 col-md-6" id="bank_card" placeholder="Номер карты" />
+                            <label class="col-12 col-md-4 text-right" for="bank_card">Реквизиты банка</label>                  
+                            <input class="col-12 col-md-6" id="bank_card" placeholder="Реквизиты" />
                         </div>
                         <br>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary">Заказать</button>
+                <button type="button" class="btn btn-primary makeorder">Заказать</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="replyLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="replyLabel">Введите Ваши данные</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">                
+                <div class="form">
+                        <div class="col-12">
+                            <label class="col-12 col-md-4 text-right" for="address">Адрес</label>
+                            <input class="col-12 col-md-6" id="address" placeholder="Адрес" />  
+                        </div>
+                        <div class="col-12">
+                            <label class="col-12 col-md-4 text-right" for="bank_card">Реквизиты банка</label>                  
+                            <input class="col-12 col-md-6" id="bank_card" placeholder="Реквизиты" />
+                        </div>
+                        <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary makeorder">Заказать</button>
             </div>
             </div>
         </div>
@@ -380,33 +409,35 @@ reload();
     $('.map__marker').on('click', function(e){
         e.preventDefault();
         
-        if (map ==null){
+        if (map == null){
         
-            var platform = new H.service.Platform({ 
-                'app_id': 'nAo325kqe9RfEXGcY7rD', 
-                'app_code': 'it85BIGBamkI4S3Ey7o36A' 
-            }); 
-
-
-            // Obtain the default map types from the platform object: 
-            var defaultLayers = platform.createDefaultLayers(); 
-
-            // Instantiate (and display) a map object: 
-            map = new H.Map( 
-                document.getElementById('mapContainer'), 
-                defaultLayers.normal.map, 
-                    { 
-                    zoom: 15, 
-                    center: { 
-                        lat:52.5192,
-                        lng:13.4061 
-                        } 
-                    }
-                );
+            var platform = new H.service.Platform({
+                app_id: 'nAo325kqe9RfEXGcY7rD',
+                app_code: 'it85BIGBamkI4S3Ey7o36A',
+                useCIT: true,
+                useHTTPS: true
+            });
+            var defaultLayers = platform.createDefaultLayers();
+            
+            //Step 2: initialize a map - this map is centered over Europe
+            map = new H.Map(document.getElementById('mapContainer'),
+                defaultLayers.normal.map,{
+                center: {lat:52.5159, lng:13.3777},
+                zoom: 14
+            });
+            // add a resize listener to make sure that the map occupies the whole container
+            window.addEventListener('resize', () => map.getViewPort().resize());
+            
+            //Step 3: make the map interactive
+            // MapEvents enables the event system
+            // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+            var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+            
+            // Create the default UI components
+            var ui = H.ui.UI.createDefault(map, defaultLayers);
 
             marker = new H.map.Marker({
-                lat:52.5192,
-                lng:13.4061
+                lat:52.5159, lng:13.3777
             });
             map.addObject(marker);
             var mov = setInterval(function(){
@@ -423,12 +454,10 @@ reload();
             }, 5000);
         } else {
             map.setCenter({
-                lat:52.5192,
-                lng:13.4061
+                lat:52.5159, lng:13.3777
             });
             marker.setPosition({
-                lat:52.5192,
-                lng:13.4061
+                lat:52.5159, lng:13.3777
             });
         }
         $('html, body').animate({
