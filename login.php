@@ -19,7 +19,6 @@
         }
       }
     </style>
-
 <body class="text-center">
 <form class="form-signin" action="" id="loginform" method="post"name="loginform">
 <img id="logo" style="width:50%;" src="/project/logo.png">
