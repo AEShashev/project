@@ -1,90 +1,6 @@
 <?php include ("header.php") ?>
 
-<style>
-
-    .cards{
-        display: flex;
-    }
-
-        .card {
-            width: 30%;
-            min-width: 200px;
-            height: 30%;
-            min-height: 300px;
-            display: block;
-            background-color: white;
-            margin: 0 auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-        }
-        
-        .card__img{
-            background-color: #d9d9d9;
-            margin: -1px;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            overflow: hidden;
-        }
-
-        .card__img img{
-            width: 100%;
-            height: auto;
-        }
-
-        .card__title {
-            font-size: 20px;
-            padding: 10px 20px;
-            font-weight: 500;
-        }
-
-        .card__container{
-            padding: 0 20px 10px 20px;
-        }
-
-        .card__text{
-            margin-bottom: 15px;
-            min-height: 50px;
-        }
-        .item-count {
-            max-width: 50px;
-        }
-        .item-buy {
-            padding:5px;
-            font-size:12px;
-            background:#007bff;
-            color:white;
-            border-radius:5px;
-        }
-
-        .total{
-            display: flex;
-            float: right;
-        }
-
-        .summary{
-            margin-left: 15px;
-        }
-
-        .cart_count{
-            background-color: blue;
-            border-radius: 50px;
-            height: 21px;
-            width: 21px;
-            display: inline-block;
-            padding: 0 6px;
-            color: white;
-        }
-
-        .card__price{
-            float: right;
-            height: 38px;
-            padding: 9px 0;
-        }
-
-        input[type="number"]{
-            max-width: 50px;
-        }
-</style>
+<link href="cards.css" rel="stylesheet">
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
@@ -153,6 +69,22 @@
     <div class="searcher">
         <input type="text" placeholder="Поиск товара" />
     </div>
+    <script>
+        $('.searcher input').on('keyup', function(){
+            var value = $(this).val().toLowerCase();
+            if (value == ""){
+                $(".items-table tbody .col1").parents('tr').removeClass('d-none');
+                return true;
+            }
+            $(".items-table tbody .col1").each(function(){
+                if ($(this).text().toLowerCase().indexOf(value) >= 0){
+                    $(this).parents('tr').removeClass('d-none');
+                } else {
+                    $(this).parents('tr').addClass('d-none');
+                }
+            });
+        });
+    </script>
         <?php
 
 
@@ -172,7 +104,7 @@ if($result)
 {
     $rows = mysqli_num_rows($result); // количество полученных строк
      
-    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col0\">ID</th><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Количество</th><th class=\"col5\">Поставщик</th><th class=\"col6\">Покупка</th></tr>";
+    echo "<div class=\"table-responsive items-table\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><thead><tr><th class=\"col0\">ID</th><th class=\"col1\">Название товара</th><th class=\"col2\">Описание</th><th class=\"col3\">Цена</th><th class=\"col4\">Количество</th><th class=\"col5\">Поставщик</th><th class=\"col6\">Покупка</th></tr></thead><tbody>";
     for ($i = 0 ; $i < $rows ; ++$i)
     {
         $row = mysqli_fetch_row($result);
@@ -180,7 +112,7 @@ if($result)
 			echo "<td class=\"col0\">$row[0]</td><td class=\"col1\">$row[1]</td><td class=\"col2\">$row[2]</td><td class=\"col3\">$row[3]</td><td class=\"col4\">$row[4]</td><td class=\"col5\">$row[5]</td><td class=\"col6\"><input type='text' class='item-count' name='count'> <a class='item-buy' href='#' action=''>Купить</a></td>";
         echo "</tr>";
     }
-    echo "</table></div>";
+    echo "</thead></table></div>";
      
     // очищаем результат
     mysqli_free_result($result);
@@ -279,7 +211,17 @@ reload();
 </div>
 
 <style>
+    .status.g-ready {
+        color: orange;
+    }
 
+    .status.deliv{
+        color: green;
+    }
+
+    .status.rides{
+        color: blue;
+    }
 </style>
 
 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -299,16 +241,15 @@ reload();
                     <td>Опельсины</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status g-ready">Готовится к отправке</td>
                     <td class="map">
-                        <a class="map__marker" href="#">Показать</a>
                     </td>
                 </tr>
                 <tr>
                     <td>Мандарины</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -317,7 +258,7 @@ reload();
                     <td>Ананасы</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -326,7 +267,7 @@ reload();
                     <td>Помидоры</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -335,7 +276,7 @@ reload();
                     <td>Рабы</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -344,7 +285,7 @@ reload();
                     <td>Опельсины</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -353,7 +294,7 @@ reload();
                     <td>Мандарины</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -362,7 +303,7 @@ reload();
                     <td>Ананасы</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status rides">В пути...</td>
                     <td class="map">
                         <a class="map__marker" href="#">Показать</a>
                     </td>
@@ -371,18 +312,15 @@ reload();
                     <td>Помидоры</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status deliv">Доставлено</td>
                     <td class="map">
-                        <a class="map__marker" href="#">Показать</a>
-                    </td>
                 </tr>
                 <tr>
                     <td>Рабы</td>
                     <td>14</td>
                     <td>1400</td>
-                    <td class="status rides">В пути</td>
+                    <td class="status deliv">Доставлено</td>
                     <td class="map">
-                        <a class="map__marker" href="#">Показать</a>
                     </td>
                 </tr>
             </tbody>
