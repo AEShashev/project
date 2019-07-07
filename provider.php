@@ -206,7 +206,47 @@ mysqli_close($link);
 
 
             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                123
+            <?php
+function reloadOrders(){ 
+    include 'connect.php'; // подключаем скрипт
+    $link = mysqli_connect($host, $user, $password, $database) 
+    or die("Ошибка " . mysqli_error($link)); 
+    $getpid = mysqli_query($link, "SELECT pID FROM providers WHERE pID = '$_SESSION[id]'") or die("Ошибка " . mysqli_error($link)); 
+
+    while($row = mysqli_fetch_array($getpid)){
+       $pID = $row['pID'];
+      //echo $pID;
+    }
+mysqli_free_result($getpid);
+$query ="SELECT * FROM orderslist WHERE pID = '$pID'";
+
+echo "<br>";
+// подключаемся к серверу
+
+$result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+if($result)
+{
+    $rows = mysqli_num_rows($result); // количество полученных строк
+     
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Номер заказа</th><th class=\"col2\">Идентификатор поставщика</th><th class=\"col3\">Общая стоимость</th><th class=\"col3\">Общий объем</th><th class=\"col3\">Адрес доставки</th></tr>";
+    for ($i = 0 ; $i < $rows ; ++$i)
+    {
+        $row = mysqli_fetch_row($result);
+        echo "<tr>";
+			echo "<td class=\"col0\"><a href=\"/project/storage.php\">$row[0]</a></td><td class=\"col1\">$row[1]</td><td class=\"col1\">$row[3]</td><td class=\"col1\">$row[4]</td><td class=\"col1\">$row[5]</td>";
+        echo "</tr>";
+    }
+    echo "</table></div>";
+     
+    // очищаем результат
+    mysqli_free_result($result);
+}
+ 
+mysqli_close($link);
+}
+ 
+ reloadOrders();
+?>
             </div>
 
 
