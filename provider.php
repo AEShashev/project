@@ -1,6 +1,7 @@
 <?php include ("header.php");
-$userID = 1;
-$providerID = 1;
+
+$pID = 0;
+
 ?>
 
 
@@ -52,12 +53,19 @@ $providerID = 1;
 
 
  
-function reload(){ 
+function reload(){ 	
 include 'connect.php'; // подключаем скрипт
 $link = mysqli_connect($host, $user, $password, $database) 
     or die("Ошибка " . mysqli_error($link)); 
-     
-$query ="SELECT * FROM items WHERE pID = 1";
+    $getpid = mysqli_query($link, "SELECT pID FROM providers WHERE pID = '$_SESSION[id]'") or die("Ошибка " . mysqli_error($link)); 
+
+    while($row = mysqli_fetch_array($getpid)){
+       $pID = $row['pID'];
+     // echo $pID;
+    }
+mysqli_free_result($getpid);
+
+$query ="SELECT * FROM items WHERE pID = '$pID'";
 
 echo "<br>";
 // подключаемся к серверу
@@ -85,24 +93,24 @@ mysqli_close($link);
 }
  
  reload();
-
-
-
 ?>
             </div>
 
 
             <div class="tab-pane fade" id="storages" role="tabpanel" aria-labelledby="storages-tab">
-            <?php
-
-
- 
+<?php
 function reloadStorage(){ 
-include 'connect.php'; // подключаем скрипт
-$link = mysqli_connect($host, $user, $password, $database) 
+    include 'connect.php'; // подключаем скрипт
+    $link = mysqli_connect($host, $user, $password, $database) 
     or die("Ошибка " . mysqli_error($link)); 
-     
-$query ="SELECT * FROM storages WHERE pID = 1";
+    $getpid = mysqli_query($link, "SELECT pID FROM providers WHERE pID = '$_SESSION[id]'") or die("Ошибка " . mysqli_error($link)); 
+
+    while($row = mysqli_fetch_array($getpid)){
+       $pID = $row['pID'];
+      //echo $pID;
+    }
+mysqli_free_result($getpid);
+$query ="SELECT * FROM storages WHERE pID = '$pID'";
 
 echo "<br>";
 // подключаемся к серверу
@@ -139,7 +147,7 @@ mysqli_close($link);
             $connect = mysqli_connect($host, $user, $password, $database) 
                 or die("Ошибка " . mysqli_error($connect)); 
                  
-            $result = mysqli_query($connect, "SELECT Name,INN,Acc,kAcc,bik,adres,bank FROM providers WHERE uID = $userID") or die ("Ошибка ". mysqli_error($connect));
+            $result = mysqli_query($connect, "SELECT Name,INN,Acc,kAcc,bik,adres,bank FROM providers WHERE uID = '$_SESSION[id]'") or die ("Ошибка ". mysqli_error($connect));
 
             while($row = mysqli_fetch_array($result)){
                $name = $row['Name'];
@@ -191,7 +199,7 @@ mysqli_close($link);
                         <input class="col-12 col-md-6" id="bank" name="bank" placeholder="Наименование банка"  />
                     </div>
                     <br>
-                    <button id="save" type="submit" style="float:right;" class="btn btn-success">Сохранить профиль</button>
+                    <button id="save" type="submit" style="float:right;" class="btn btn-primary">Сохранить профиль</button>
                 </div>
               </form>  
             </div>
