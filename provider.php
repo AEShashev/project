@@ -228,12 +228,12 @@ if($result)
 {
     $rows = mysqli_num_rows($result); // количество полученных строк
      
-    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Номер заказа</th><th class=\"col2\">Идентификатор поставщика</th><th class=\"col3\">Общая стоимость</th><th class=\"col3\">Общий объем</th><th class=\"col3\">Адрес доставки</th><th>На карте</th></tr>";
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Номер заказа</th><th class=\"col2\">Идентификатор поставщика</th><th class=\"col3\">Общая стоимость</th><th class=\"col3\">Общий объем</th><th class=\"col3\">Адрес доставки</th><th>Статус</th><th>На карте</th></tr>";
     for ($i = 0 ; $i < $rows ; ++$i)
     {
         $row = mysqli_fetch_row($result);
         echo "<tr>";
-			echo "<td class=\"col0\"><a href=\"/project/storage.php\">$row[0]</a></td><td class=\"col1\">$row[1]</td><td class=\"col1\">$row[3]</td><td class=\"col1\">$row[4]</td><td class=\"col1\">$row[5]</td><td class=\"map\"><a href=\"#\" class=\"map__marker\">Показать</a></td>";
+			echo "<td class=\"col0\"><a href=\"/project/storage.php\">$row[0]</a></td><td class=\"col1\">$row[1]</td><td class=\"col1\">$row[3]</td><td class=\"col1\">$row[4]</td><td class=\"col1\">$row[5]</td><td style=\"color: blue;\">В пути...</td><td class=\"map\"><a href=\"#\" class=\"map__marker\">Показать</a></td>";
         echo "</tr>";
     }
     echo "</table></div>";
