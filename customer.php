@@ -291,31 +291,6 @@ mysqli_close($link);
         var table = '';
         var cost = 0;
         var summ = 0;
-<<<<<<< HEAD
-        var _table = JSON.parse(cart, function(key, value) {
-            switch (key){
-
-                case 'id': 
-                    table+='<tr data-item-id="'+value+'">';
-                    break;
-                
-                case 'name': 
-                    table+='<td class="name">'+value+'</td>';
-                    break;
-                
-                case 'price': 
-                    table+='<td class="price">'+value+'</td>';
-                    cost = value;
-                    break;
-                
-                case 'count': 
-                    table+='<td class="count"><span class="minus">-</span>'+value+'<span class="plus">+</span></td><td class="summ">'+(value*cost)+'</td></tr>';
-                    summ+=value*cost;
-                    break;
-
-                default:
-                    break;
-=======
         if (cart != null){
             var _table = JSON.parse(cart, function(key, value) {
                 switch (key){
@@ -340,7 +315,6 @@ mysqli_close($link);
 
                     default:
                         break;
->>>>>>> 42b8c653adbad8dae24467cf82a6fbcc6129afc7
 
                 }
             });
