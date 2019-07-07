@@ -2,31 +2,33 @@
 	<html lang="en">
 	<head>
 	<meta charset="utf-8"> 
- <title> Как с помощью PHP и MySQL создать систему регистрации и авторизации пользователей</title>
+ <title> Регистрация</title>
 <link href="css/style.css" media="screen" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'rel='stylesheet' type='text/css'>
+<link href="style.css" rel="stylesheet">
 	</head>
-	<body>
-<div class="container mregister">
-<div id="login">
- <h1>Регистрация</h1>
-<form action="register.php" id="registerform" method="post"name="registerform">
- <p><label for="user_login">Полное имя<br>
- <input class="input" id="full_name" name="full_name"size="32"  type="text" value=""></label></p>
-<p><label for="user_pass">E-mail<br>
-<input class="input" id="email" name="email" size="32"type="email" value=""></label></p>
-<p><label for="user_pass">Имя пользователя<br>
-<input class="input" id="username" name="username"size="20" type="text" value=""></label></p>
-<p><label for="user_pass">Пароль<br>
-<input class="input" id="password" name="password"size="32"   type="password" value=""></label></p>
-<p class="submit"><input class="button" id="register" name= "register" type="submit" value="Зарегистрироваться"></p>
-	  <p class="regtext">Уже зарегистрированы? <a href= "login.php">Введите имя пользователя</a>!</p>
- </form>
-</div>
-</div>
-<footer>
-© 2019
- </footer>
+<body class="text-center">
+
+ <form class="form-signin" action="register.php" id="registerform" method="post" name="registerform">
+	<img id="logo" style="width:50%;" src="/project/logo.png">
+	<br>
+	<br>
+    <h1 class="h3 mb-3 font-weight-normal" style="color:#D7DDE2">Регистрация</h1>
+	
+    <label for="login" class="sr-only">Login</label>
+	<input type="text" id="login" name="login" class="form-control" placeholder="Login" required autofocus>
+    <label for="email" class="sr-only">E-mail</label>
+	<input type="text" id="email" name="email" class="form-control" placeholder="E-mail" required style="margin-top: 10px;">
+    <label for="email" class="sr-only">Пароль</label>
+	<input type="text" id="password" name="password" class="form-control" placeholder="Пароль" required style="margin-top: 10px;">
+	<p class="submit"><button class="btn btn-lg btn-primary btn-block mt-3" id="register" name= "register" type="submit">Зарегистрироваться</button></p>
+	  <p class="regtext">Уже зарегистрированы? <br /><a href= "login.php">Введите имя пользователя</a>!</p>
+      <p class="mt-5 mb-3 text-muted">© 2019</p>
+</form>
+
+
+
 </body>
 </html>
 
