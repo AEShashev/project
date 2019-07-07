@@ -228,12 +228,12 @@ if($result)
 {
     $rows = mysqli_num_rows($result); // количество полученных строк
      
-    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Номер заказа</th><th class=\"col2\">Идентификатор поставщика</th><th class=\"col3\">Общая стоимость</th><th class=\"col3\">Общий объем</th><th class=\"col3\">Адрес доставки</th></tr>";
+    echo "<div class=\"table-responsive\" style=\"width:100%;overflow-y:hidden;\"><table class=\"table table-striped table-sm\"><tr><th class=\"col1\">Номер заказа</th><th class=\"col2\">Идентификатор поставщика</th><th class=\"col3\">Общая стоимость</th><th class=\"col3\">Общий объем</th><th class=\"col3\">Адрес доставки</th><th>На карте</th></tr>";
     for ($i = 0 ; $i < $rows ; ++$i)
     {
         $row = mysqli_fetch_row($result);
         echo "<tr>";
-			echo "<td class=\"col0\"><a href=\"/project/storage.php\">$row[0]</a></td><td class=\"col1\">$row[1]</td><td class=\"col1\">$row[3]</td><td class=\"col1\">$row[4]</td><td class=\"col1\">$row[5]</td>";
+			echo "<td class=\"col0\"><a href=\"/project/storage.php\">$row[0]</a></td><td class=\"col1\">$row[1]</td><td class=\"col1\">$row[3]</td><td class=\"col1\">$row[4]</td><td class=\"col1\">$row[5]</td><td class=\"map\"><a href=\"#\" class=\"map__marker\">Показать</a></td>";
         echo "</tr>";
     }
     echo "</table></div>";
@@ -247,6 +247,7 @@ mysqli_close($link);
  
  reloadOrders();
 ?>
+<div style="width: 640px; height: 480px" id="mapContainer"></div>
             </div>
 
 
@@ -255,6 +256,8 @@ mysqli_close($link);
 </main>
 
 <script>
+    var map;
+    var marker;
 
 $(document).ready(function(){
 
@@ -271,6 +274,62 @@ $('.edit-item').on('click', function(){
     var item_id = $(this).parents('tr').attr('data-item-id');
     document.location.href = '/project/item.php?item_id=' + item_id;
 });
+
+
+$('.map__marker').on('click', function(e){
+        e.preventDefault();
+        
+        if (map == null){
+        
+            var platform = new H.service.Platform({
+                app_id: 'nAo325kqe9RfEXGcY7rD',
+                app_code: 'it85BIGBamkI4S3Ey7o36A',
+                useCIT: true,
+                useHTTPS: true
+            });
+            var defaultLayers = platform.createDefaultLayers();
+            
+            //Step 2: initialize a map - this map is centered over Europe
+            map = new H.Map(document.getElementById('mapContainer'),
+                defaultLayers.normal.map,{
+                center: {lat:52.5159, lng:13.3777},
+                zoom: 14
+            });
+            // add a resize listener to make sure that the map occupies the whole container
+            window.addEventListener('resize', () => map.getViewPort().resize());
+            
+            //Step 3: make the map interactive
+            // MapEvents enables the event system
+            // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+            var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+            
+            // Create the default UI components
+            var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+            marker = new H.map.Marker({
+                lat:52.5159, lng:13.3777
+            });
+            map.addObject(marker);
+            var mov = setInterval(function(){
+                var _lat = map.getCenter().lat + 0.0005;
+                var _lng = map.getCenter().lng + 0.0005;
+                marker.setPosition({
+                    lat: _lat,
+                    lng: _lng
+                });
+            }, 5000);
+        } else {
+            map.setCenter({
+                lat:52.5159, lng:13.3777
+            });
+            marker.setPosition({
+                lat:52.5159, lng:13.3777
+            });
+        }
+        $('html, body').animate({
+            scrollTop: $('#mapContainer').offset().top
+        }, 250);
+    });
 
 </script>
 
