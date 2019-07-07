@@ -1,12 +1,7 @@
-<?php
-session_start();
-if(empty($_SESSION['user'])){
-      header('Location: http://project/login.php');
-  }
-else {
-?>
 
-<? include ("header.php") ?>
+
+
+<?php include ("header.php") ?>
 <div class="container-fluid">
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -220,4 +215,3 @@ else {
   </div>
 </div>
 <?php include ("footer.php")?>
-<?php } ?>

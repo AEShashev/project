@@ -1,8 +1,8 @@
 <?php
 
 return array(
-	'host' => 'localhost',
-	'dbname' => 'id6440796_shop',
-	'user' => 'id6440796_shop',
-	'password' => 'tenset',
+	'host' => 'sql178.main-hosting.eu',
+	'dbname' => 'u794422688_users',
+	'user' => 'u794422688_root',
+	'password' => 'CheekAtilla',
 );

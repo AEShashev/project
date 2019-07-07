@@ -1,3 +1,12 @@
+<?php
+  session_start();
+
+if(!isset($_SESSION["session_username"])):
+header("location:login.php");
+else:
+
+  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +123,7 @@
     </a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link sign-out" href="#">
+            <a class="nav-link sign-out" href="logout.php">
                 <img id="sign_out" src="/project/exit.png" height="33px">                
                 <img id="sign_out_dark" src="/project/exit_dark.png" height="33px">
             </a>
@@ -151,3 +160,4 @@
         </ul>
       </div>
     </nav>
+<?php endif; ?>
