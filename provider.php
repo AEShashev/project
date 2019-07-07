@@ -199,7 +199,7 @@ mysqli_close($link);
                         <input class="col-12 col-md-6" id="bank" name="bank" placeholder="Наименование банка"  />
                     </div>
                     <br>
-                    <button id="save" type="submit" style="float:right;" class="btn btn-success">Сохранить профиль</button>
+                    <button id="save" type="submit" style="float:right;" class="btn btn-primary">Сохранить профиль</button>
                 </div>
               </form>  
             </div>
